@@ -1,0 +1,104 @@
+netflix 10 tools for performance analysis
+http://techblog.netflix.com/2015/11/linux-performance-analysis-in-60s.html
+
+what turn on port 80
+sudo lsof -i:80
+
+what program have a port in listen or connect
+sudo netstat -tulpn
+
+Know which process lock read a file
+lsof /name/of/file
+
+Who is on server and what they are doing
+w
+
+list all users account
+awk -F: '{ print $1 }' /etc/passwd
+
+send a brodcast message to all people login
+wall
+<message>
+CTRL+D
+
+Find out the processes PID that opened tcp port 7000
+fuser 7000/tcp
+
+what is pid(s) of process
+pgrep <process_name>
+
+list all process
+ps aux        sous mac: ps ax
+
+get process with name
+ps aux | grep <process_name>
+
+install
+htop awesome top
+pstree ps with dependancy
+
+linux only:
+pstree
+
+locate nom du file
+updatedb: upgrade db du locate
+update db on mac : sudo /usr/libexec/locate.updatedb
+
+whereis nom_de_la_commande
+which nom_de_la_commande
+
+top
+	- color syntax : z
+	- change sort : > <
+	Ctrl-S to pause, Ctrl-Q to continue
+
+
+	DPKG and apt-get
+know which package is install
+dpkg-query -l
+
+apt-get autoremove pour supprimer les paquets avec dépendances obsolète
+
+apt-get remove --purge "paquet name" pour supprimer un paquet et ces fichier de config
+apt-cache search {package-name}
+
+
+Keep connection secure shell when you don’t have right to lost connection (dist-upgrade…)
+Use TMUX because screen is not maintained anymore
+
+ENCODAGE :
+Know which encodage for a file:
+linux : file -bi [filename]
+mac: file -bI [filename]
+
+Translate encodage and print warning
+iconv -f ENCODING -t ENCODING input
+Après avoir vérifier que le file est utf-8 aver file -bi
+un iconv utf-8 utf-8 file devrait montrer les erreurs?
+
+
+Version Linux
+uname -r
+Version Distribution
+lsb_release -a  if null -> cat /etc/*-release
+
+
+Afficher les fichier caché sous mac lorsqu'on est dans une fenêtre de type open, save... (de chrome...)
+maj + cmd + .
+
+
+### APACHE ###
+Get a list of all virtual hosts which are defined in all apache configuration files
+apache2ctl -S
+
+How to check which apache modules are enabled/installed?
+apache2ctl -M
+
+
+### MYSQL ###
+Connaitre la taille des DB:
+SELECT table_schema "Data Base Name",
+		sum( data_length + index_length ) / 1024 / 1024 "Data Base Size in MB",
+		sum( data_free )/ 1024 / 1024 "Free Space in MB"
+FROM information_schema.TABLES
+GROUP BY table_schema ;
